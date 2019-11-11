@@ -977,7 +977,7 @@ async function run() {
 
     // Set the workspace directory.
     const workspace = process.env['GITHUB_WORKSPACE'];
-    const home = process.env['GITHUB_HOME'];
+    const home = process.env['HOME'];
 
     // Download and extract the desired Docker archive.
     const dockerVersion = core.getInput('dockerVersion', { required: true });

@@ -14,5 +14,5 @@ jobs:
     - name: Run the Action
       uses: ./
       with:
-        username: ${{ secrets.USERNAME }}
+        username: matootie
         personalAccessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
