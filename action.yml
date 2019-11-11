@@ -1,13 +1,28 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'GitHub Docker'
+description: 'Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  dockerVersion:
+    description: 'Specific version of Docker to use. Defaults to 19.03.4.'
+    required: false
+    default: '19.03.4'
+  username:
+    description: 'GitHub user to publish the image on behalf of.'
     required: true
-    default: '1000'
+  personalAccessToken:
+    description: 'GitHub Personal Access Token for the user.'
+    required: true
+  repositoryName:
+    description: 'The repository to push the image to. Defaults to current repository. Must be specified in format user/repo'
+    required: false
+  imageName:
+    description: 'The desired name for the image. Defaults to current repository name.'
+    required: false
+  imageTag:
+    description: 'The desired tag for the image. Defaults to current branch or release version number.'
+    required: false
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  imageURL:
+    description: 'The URL of the image.'
 runs:
   using: 'node12'
   main: 'dist/index.js'
