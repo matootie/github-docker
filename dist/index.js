@@ -939,9 +939,11 @@ module.exports = require("os");
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const process = __webpack_require__(765);
+const path = __webpack_require__(622);
 const core = __webpack_require__(470);
 const tc = __webpack_require__(533);
 const exec = __webpack_require__(986);
+const io = __webpack_require__(1);
 
 async function run() {
   try {
@@ -975,16 +977,19 @@ async function run() {
 
     // Set the workspace directory.
     const workspace = process.env['GITHUB_WORKSPACE'];
+    const home = process.env['GITHUB_HOME'];
 
     // Download and extract the desired Docker archive.
     const dockerVersion = core.getInput('dockerVersion', { required: true });
     const dockerArchive = await tc.downloadTool(
       `https://download.docker.com/linux/static/stable/x86_64/docker-${dockerVersion}.tgz`);
-    const dockerDir = await tc.extractTar(dockerArchive, '/tmp/github-docker');
+    const dockerHome = path.join(home, 'github-docker');
+    await io.mkdirP(dockerHome);
+    const dockerDir = await tc.extractTar(dockerArchive, dockerHome);
 
     // Run the Docker daemon and log in.
     const username = core.getInput('username', { required: true });
-    const password = core.getInput('password', { required: true });
+    const password = core.getInput('personalAccessToken', { required: true });
     await exec.exec('/tmp/github-docker/dockerd &');
     await exec.exec(
       '/tmp/github-docker/docker',
