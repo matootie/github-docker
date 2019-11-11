@@ -2,6 +2,7 @@ const process = require('process');
 const core = require('@actions/core');
 const tc = require('@actions/tool-cache');
 const exec = require('@actions/exec');
+const io = require('@actions/io');
 
 async function run() {
   try {
@@ -40,6 +41,7 @@ async function run() {
     const dockerVersion = core.getInput('dockerVersion', { required: true });
     const dockerArchive = await tc.downloadTool(
       `https://download.docker.com/linux/static/stable/x86_64/docker-${dockerVersion}.tgz`);
+    await io.mkdirP('/tmp/github-docker');
     const dockerDir = await tc.extractTar(dockerArchive, '/tmp/github-docker');
 
     // Run the Docker daemon and log in.
