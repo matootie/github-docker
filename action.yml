@@ -1,4 +1,4 @@
-name: 'GitHub Docker'
+name: 'GitHub Docker Action'
 description: 'Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step'
 inputs:
   username:
@@ -22,3 +22,6 @@ outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: 'anchor'
+  color: 'blue'
