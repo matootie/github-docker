@@ -34,7 +34,7 @@ The full URL of the image.
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker@v1.0.0
+  uses: matootie/github-docker@v1.0.1
   with:
     username: matootie
     personalAccessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
