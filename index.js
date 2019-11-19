@@ -40,11 +40,13 @@ async function run() {
     // Process the repository name.
     let repository = core.getInput('repositoryName', { required: false });
     if (!repository) repository = process.env['GITHUB_REPOSITORY'];
+    repository = repository.toLowerCase();
 
     // Process the image name.
     let imageName = core.getInput('imageName', { required: false });
     const repoArray = repository.split('/');
     if (!imageName) imageName = repoArray[repoArray.length - 1];
+    imageName = imageName.toLowerCase();
 
     // Process the image tag.
     let imageTag = core.getInput('imageTag', { required: false });
