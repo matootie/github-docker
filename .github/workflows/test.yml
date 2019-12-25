@@ -1,5 +1,8 @@
 name: "Test Run"
-on: push
+on:
+  push:
+    paths: 
+      - "dist/index.js"
 jobs:
   test:
     runs-on: ubuntu-latest
