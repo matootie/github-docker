@@ -670,7 +670,7 @@ async function run() {
     path.join(workspace, context);
 
     // Log in to Docker.
-    const username = core.getInput('username', { required: false });
+    let username = core.getInput('username', { required: false });
     if (!username) username = process.env['GITHUB_ACTOR'];
     const password = core.getInput('accessToken', { required: true });
     await exec.exec(
