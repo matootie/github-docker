@@ -1,8 +1,5 @@
 name: "Test Run"
-on:
-  push:
-    paths:
-      - "dist/index.js"
+on: push
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,6 +10,6 @@ jobs:
         id: run-action
         uses: ./
         with:
-          personalAccessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Test output
         run: echo ${{ steps.run-action.outputs.imageURL }}
