@@ -28,7 +28,7 @@ async function run() {
 
     */
 
-    // Set the workspace directory.
+    // Set the workspace directory and context.
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
     path.join(workspace, context);
