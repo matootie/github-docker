@@ -2,7 +2,7 @@ name: "GitHub Docker Action"
 description: "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step"
 inputs:
   accessToken:
-    description: "GitHub Token for the user. Consider using ${{ secrets.GITHUB_TOKEN }}."
+    description: "GitHub Repository Token to log in using."
     required: true
   context:
     description: "Where should GitHub Docker find the Dockerfile, relative to the root of the repository."
