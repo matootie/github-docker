@@ -665,6 +665,7 @@ async function run() {
     */
 
     // Set the workspace directory and context.
+    const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
     path.join(workspace, context);
@@ -709,6 +710,11 @@ async function run() {
 
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
+
+    // Delete the Docker config.
+    exec.exec(
+      'rm',
+      ['-v', `${home}/.docker/config.json`]);
   }
   catch (error) {
     core.setFailed(error.message);
