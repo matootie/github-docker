@@ -700,8 +700,7 @@ async function run() {
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', imageURL, workspace],
-      { env: { DOCKER_BUILDKIT: '1' } });
+      ['build', '--tag', imageURL, workspace]);
 
     // Push the Docker image.
     await exec.exec(
