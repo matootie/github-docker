@@ -8,6 +8,10 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 **Required**. GitHub Token for the user. Must have write permissions for packages. Recommended set up would be to use the provided GitHub Token for your repository; `${{ secrets.GITHUB_TOKEN }}`.
 
+### `context`
+
+*Optional*. Where should GitHub Docker find the Dockerfile? This is a path relative to the repository root. Defaults to `.`, meaning it will look for a `Dockerfile` in the root of the repository.
+
 ### `username`
 
 *Optional*. GitHub user to publish the image on behalf of. Defaults to the user who triggered the action to run.
