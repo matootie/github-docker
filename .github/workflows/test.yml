@@ -1,19 +1,18 @@
 name: "Test Run"
 on:
   push:
-    paths: 
+    paths:
       - "dist/index.js"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v1
-    - name: Run the Action
-      id: run-action
-      uses: ./
-      with:
-        username: matootie
-        personalAccessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-    - name: Test output
-      run: echo ${{ steps.run-action.outputs.imageURL }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Run the Action
+        id: run-action
+        uses: ./
+        with:
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test output
+        run: echo ${{ steps.run-action.outputs.imageURL }}

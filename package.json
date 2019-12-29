@@ -1,6 +1,6 @@
 {
   "name": "github-docker",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step",
   "main": "index.js",
   "scripts": {

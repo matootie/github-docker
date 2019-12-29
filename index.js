@@ -1,4 +1,5 @@
 const process = require('process');
+const path = require('path');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
@@ -27,12 +28,16 @@ async function run() {
 
     */
 
-    // Set the workspace directory.
+    // Set the workspace directory and context.
+    const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
+    const context = core.getInput('context', { required: true });
+    path.join(workspace, context);
 
     // Log in to Docker.
-    const username = core.getInput('username', { required: true });
-    const password = core.getInput('personalAccessToken', { required: true });
+    let username = core.getInput('username', { required: false });
+    if (!username) username = process.env['GITHUB_ACTOR'];
+    const password = core.getInput('accessToken', { required: true });
     await exec.exec(
       `docker`,
       ['login', 'docker.pkg.github.com', '--username', username, '--password', password]);
@@ -54,18 +59,26 @@ async function run() {
     const refArray = ref.split('/');
     if (!imageTag) imageTag = refArray[refArray.length - 1];
 
+    // Set some variables.
+    const imageURL = `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`
+
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`, workspace]);
+      ['build', '--tag', imageURL, workspace]);
 
     // Push the Docker image.
     await exec.exec(
       `docker`,
-      ['push', `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`]);
+      ['push', imageURL]);
 
     // Output the image URL.
-    core.setOutput('imageURL', `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`);
+    core.setOutput('imageURL', imageURL);
+
+    // Delete the Docker config.
+    exec.exec(
+      'rm',
+      ['-v', `${home}/.docker/config.json`]);
   }
   catch (error) {
     core.setFailed(error.message);
