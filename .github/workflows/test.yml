@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        if: github.repository == 'matootie/github-docker'
       - name: Run the Action
         id: run-action
         uses: ./
