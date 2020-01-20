@@ -59,13 +59,18 @@ async function run() {
     const refArray = ref.split('/');
     if (!imageTag) imageTag = refArray[refArray.length - 1];
 
+    // Process the build args
+    let buildArg = [];
+    const buildArgsRaw = core.getInput('buildArg', { require: false });
+    if (buildArgsRaw) buildArg = buildArgsRaw.match(/(\\.|[^&])+/g).flatMap(str => ["--build-arg", str]);
+
     // Set some variables.
     const imageURL = `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`
 
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', imageURL, workspace]);
+      ['build', '--tag', imageURL, workspace, ...buildArg]);
 
     // Push the Docker image.
     await exec.exec(
