@@ -28,7 +28,7 @@
     "@actions/exec": "^1.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.20.5",
+    "@zeit/ncc": "^0.21.0",
     "eslint": "^6.3.0"
   }
 }
