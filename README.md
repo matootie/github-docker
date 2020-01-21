@@ -44,7 +44,7 @@ The full URL of the image.
 - name: Checkout Repository
   uses: actions/checkout@v2
 - name: Publish Image
-  uses: matootie/github-docker@v2.0.0
+  uses: matootie/github-docker@v2.1.0
   with:
     accessToken: ${{ secrets.GITHUB_TOKEN }}
 ```
