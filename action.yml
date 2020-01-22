@@ -20,6 +20,12 @@ inputs:
   imageTag:
     description: "The desired tag for the image. Defaults to current branch or release version number."
     required: false
+  imageTagPrefix:
+    description: "Added to the beginning of the tag."
+    required: false
+  imageTagSuffix:
+    description: "Added to the end of the tag."
+    required: false
   buildArguments:
     description: "The build arguments for image."
     required: false

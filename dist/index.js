@@ -693,7 +693,18 @@ async function run() {
     let imageTag = core.getInput('imageTag', { required: false });
     const ref = process.env['GITHUB_REF'];
     const refArray = ref.split('/');
-    if (!imageTag) imageTag = refArray[refArray.length - 1];
+    if (!imageTag) {
+        const refLast = refArray[refArray.length - 1];
+        if (refLast === "merge" && refArray.length >= 2) {
+            imageTag = "mr" + refArray[refArray.length - 2];
+        } else {
+            imageTag = refLast;
+        }
+    }
+    let imageTagPrefix = core.getInput('imageTagPrefix', { required: false });
+    if (imageTagPrefix) imageName = imageTagPrefix + imageName;
+    let imageTagSuffix = core.getInput('imageTagSuffix', { required: false });
+    if (imageTagSuffix) imageName = imageName + imageTagSuffix;
 
     // Set some variables.
     const imageURL = `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`

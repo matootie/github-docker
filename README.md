@@ -28,6 +28,14 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 *Optional*. The desired tag for the image. Defaults to current branch or release version number.
 
+### `imageTagPrefix`
+
+*Optional*. Added to the beginning of the tag.
+
+### `imageTagSuffix`
+
+*Optional*. Added to the end of the tag.
+
 ### `buildArguments`
 
 *Optional*. Any additional build arguments to use when building the image.
