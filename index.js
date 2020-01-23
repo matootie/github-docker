@@ -57,7 +57,18 @@ async function run() {
     let imageTag = core.getInput('imageTag', { required: false });
     const ref = process.env['GITHUB_REF'];
     const refArray = ref.split('/');
-    if (!imageTag) imageTag = refArray[refArray.length - 1];
+    if (!imageTag) {
+        const refLast = refArray[refArray.length - 1];
+        if (refLast === "merge" && refArray.length >= 2) {
+            imageTag = "mr" + refArray[refArray.length - 2];
+        } else {
+            imageTag = refLast;
+        }
+    }
+    let imageTagPrefix = core.getInput('imageTagPrefix', { required: false });
+    if (imageTagPrefix) imageTag = imageTagPrefix + imageTag;
+    let imageTagSuffix = core.getInput('imageTagSuffix', { required: false });
+    if (imageTagSuffix) imageTag = imageTag + imageTagSuffix;
 
     // Process the build args
     let buildArg = [];
