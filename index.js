@@ -32,7 +32,7 @@ async function run() {
     const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
-    path.join(workspace, context);
+    const workdir = path.join(workspace, context);
 
     // Log in to Docker.
     let username = core.getInput('username', { required: false });
@@ -81,7 +81,7 @@ async function run() {
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', imageURL, workspace, ...buildArg]);
+      ['build', '--tag', imageURL, workdir, ...buildArg]);
 
     // Push the Docker image.
     await exec.exec(

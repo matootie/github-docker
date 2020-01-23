@@ -15,5 +15,6 @@ jobs:
         uses: ./
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
+          context: checkrun
       - name: Test output
         run: echo ${{ steps.run-action.outputs.imageURL }}
