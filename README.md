@@ -30,11 +30,11 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 ### `imageTagPrefix`
 
-*Optional*. Added to the beginning of the tag.
+*Optional*. Added to the beginning of the tag. Useful if you want to let *GitHub Docker* decide the tag, but prepend something of your own to it.
 
 ### `imageTagSuffix`
 
-*Optional*. Added to the end of the tag.
+*Optional*. Added to the end of the tag. Useful if you want to let *GitHub Docker* decide the tag, but append something of your own to it.
 
 ### `buildArguments`
 
@@ -52,7 +52,7 @@ The full URL of the image.
 - name: Checkout Repository
   uses: actions/checkout@v2
 - name: Publish Image
-  uses: matootie/github-docker@v2.1.0
+  uses: matootie/github-docker@v2.2.0
   with:
     accessToken: ${{ secrets.GITHUB_TOKEN }}
 ```
