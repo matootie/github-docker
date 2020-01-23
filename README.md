@@ -52,7 +52,7 @@ The full URL of the image.
 - name: Checkout Repository
   uses: actions/checkout@v2
 - name: Publish Image
-  uses: matootie/github-docker@v2.2.0
+  uses: matootie/github-docker@v2.2.1
   with:
     accessToken: ${{ secrets.GITHUB_TOKEN }}
 ```
