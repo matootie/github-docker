@@ -39,6 +39,12 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 ### `buildArgs`
 
 *Optional*. Any additional build arguments to use when building the image.
+```yaml
+with:
+  buildArg: |
+    HTTP_PROXY=http://10.20.30.2:1234
+    FTP_PROXY=http://40.50.60.5:4567
+```
 
 ## Outputs
 
@@ -46,13 +52,13 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 The full URL of the image.
 
-## Example usage
+## Simple usage
 
 ```yaml
 - name: Checkout Repository
   uses: actions/checkout@v2
 - name: Publish Image
-  uses: matootie/github-docker@v2.2.1
+  uses: matootie/github-docker@v2.2.2
   with:
     accessToken: ${{ secrets.GITHUB_TOKEN }}
 ```
