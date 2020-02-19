@@ -36,7 +36,7 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 *Optional*. Added to the end of the tag. Useful if you want to let *GitHub Docker* decide the tag, but append something of your own to it.
 
-### `buildArguments`
+### `buildArgs`
 
 *Optional*. Any additional build arguments to use when building the image.
 
