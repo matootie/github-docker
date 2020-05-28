@@ -62,3 +62,16 @@ The full URL of the image.
   with:
     accessToken: ${{ secrets.GITHUB_TOKEN }}
 ```
+DEV
+
+```bash
+docker build -t github-actions-dev:latest .
+
+docker run --rm -ti -v $PWD:/github-actions github-actions-dev:latest bash
+```
+build
+
+```bash
+npm run package
+```
+

@@ -1,12 +1,12 @@
 const process = require('process');
 const path = require('path');
+const url = require('url');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
 async function run() {
   try {
     /*
-
     Required data:
     - GitHub username.
       - Required
@@ -52,41 +52,29 @@ async function run() {
     const repoArray = repository.split('/');
     if (!imageName) imageName = repoArray[repoArray.length - 1];
     imageName = imageName.toLowerCase();
-
-    // Process the image tag.
-    let imageTag = core.getInput('imageTag', { required: false });
-    const ref = process.env['GITHUB_REF'];
-    const refArray = ref.split('/');
-    if (!imageTag) {
-      const refLast = refArray[refArray.length - 1];
-      if (refLast === "merge" && refArray.length >= 2) {
-        imageTag = "mr" + refArray[refArray.length - 2];
-      } else {
-        imageTag = refLast;
-      }
-    }
-    let imageTagPrefix = core.getInput('imageTagPrefix', { required: false });
-    if (imageTagPrefix) imageTag = imageTagPrefix + imageTag;
-    let imageTagSuffix = core.getInput('imageTagSuffix', { required: false });
-    if (imageTagSuffix) imageTag = imageTag + imageTagSuffix;
-
+    
+    const imageURL = `docker.pkg.github.com/${repository}/${imageName}:`
+    
+    
     // Process the build args
     let buildArg = [];
     const buildArgsRaw = core.getInput('buildArg', { require: false });
     if (buildArgsRaw) buildArg = buildArgsRaw.match(/\w+=\S+/g).flatMap(str => ["--build-arg", str]);
 
-    // Set some variables.
-    const imageURL = `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`
+
+    let pushtags = [];
+    const pushRaw = core.getInput('tags', { require: false });
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", path.join(imageURL, str)]);    
 
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', imageURL, workdir, ...buildArg]);
+      ['build', ...pushtags, workdir, ...buildArg]);
 
     // Push the Docker image.
     await exec.exec(
       `docker`,
-      ['push', imageURL]);
+      ['push', ...pushtags]);
 
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
