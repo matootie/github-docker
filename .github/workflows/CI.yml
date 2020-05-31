@@ -18,9 +18,7 @@ jobs:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           repositoryName: github-actions-for-packages
           imageName: tic-tac-toe
-          imageTag: |
-            latest
-            anothertag
+          imageTag: latest
           buildArg: |
             THISISARG1=test
             THISISARG2=test
@@ -31,9 +29,7 @@ jobs:
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
           repositoryName: github-actions-for-packages/tic-tac-toe
-          imageTag: |
-            latest
-            anothertag
+          imageTag: latest
           buildArg: |
             THISISARG1=test
             THISISARG2=test
