@@ -50,7 +50,6 @@ jobs:
       - name: Run the Action
         uses: ./
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
           tags: latest
           image_name: CI
           build_arg: |
