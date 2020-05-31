@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - ".github/workflows/test.yml"
+      - "Dockerfile"
       - "dist/index.js"
 jobs:
   test:
@@ -21,7 +22,7 @@ jobs:
           buildArg: |
             THISISARG1=test
             THISISARG2=test
-            
+
       - uses: craftech-io/slack-action@v1
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
