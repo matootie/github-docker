@@ -15,7 +15,9 @@ jobs:
         id: run-action
         uses: ./
         with:
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: CI
+          image_name: CI
           tags: |
             latest
             anothertag

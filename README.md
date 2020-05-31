@@ -4,7 +4,7 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 ## Inputs
 
-### `accessToken`
+### `access_token`
 
 **Required**. GitHub Token for the user. Must have write permissions for packages. Recommended set up would be to use the provided GitHub Token for your repository; `${{ secrets.GITHUB_TOKEN }}`.
 
@@ -16,34 +16,31 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 *Optional*. GitHub user to publish the image on behalf of. Defaults to the user who triggered the action to run.
 
-### `repositoryName`
+### `repository`
 
 *Optional*. The repository to push the image to. Defaults to current repository. Must be specified in format `user/repo`.
 
-### `imageName`
+### `image_name`
 
 *Optional*. The desired name for the image. Defaults to current repository name.
 
-### `imageTag`
+### `tags`
 
-*Optional*. The desired tag for the image. Defaults to current branch or release version number.
-
-### `imageTagPrefix`
-
-*Optional*. Added to the beginning of the tag. Useful if you want to let *GitHub Docker* decide the tag, but prepend something of your own to it.
-
-### `imageTagSuffix`
-
-*Optional*. Added to the end of the tag. Useful if you want to let *GitHub Docker* decide the tag, but append something of your own to it.
-
+*Required*. The desired tag for the image. Can you user multiples tags
+```yaml
+with:
+  tags: |
+    latest
+    anothertag
+```
 ### `buildArg`
 
 *Optional*. Any additional build arguments to use when building the image.
 ```yaml
 with:
-  buildArg: |
-    HTTP_PROXY=http://10.20.30.2:1234
-    FTP_PROXY=http://40.50.60.5:4567
+  build_args: |
+    THISISARG1=test
+    THISISARG2=test
 ```
 
 ## Outputs
@@ -60,6 +57,7 @@ The full URL of the image.
 - name: Publish Image
   uses: matootie/github-docker@v2.2.2
   with:
-    accessToken: ${{ secrets.GITHUB_TOKEN }}
+    tags: latest
+    access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
