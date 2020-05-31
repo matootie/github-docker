@@ -17,7 +17,6 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
           repository: CI
-          image_name: CI
           tags: |
             latest
             anothertag
