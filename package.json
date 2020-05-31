@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/craftech-io/github-docker.git"
+    "url": "git+https://github.com/craftech-io/package-action.git"
   },
   "keywords": [
     "GitHub",
@@ -20,9 +20,9 @@
   "author": "Mateja Lasan <mateja@lasan.ca> (https://github.com/matootie)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/craftech-io/github-docker/issues"
+    "url": "https://github.com/craftech-io/package-action/issues"
   },
-  "homepage": "https://github.com/craftech-io/github-docker#readme",
+  "homepage": "https://github.com/craftech-io/package-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.1",
     "@actions/exec": "^1.0.3"

@@ -24,7 +24,7 @@ Build and publish your repository as a Docker image and push it to GitHub Packag
 
 ```yaml
 - name: Publish Image
-  uses: craftech-io/github-docker@v1.0.0
+  uses: craftech-io/package-action@v3.0.0
   with:
     tags: latest
     access_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +48,7 @@ with:
 
 ```yaml
 - name: Publish Image
-  uses: craftech-io/github-docker@v1.0.0
+  uses: craftech-io/package-action@v3.0.0
   id: url-GPR 
   with:
     tags: latest
@@ -61,16 +61,12 @@ with:
 ### Push a different repository
 ```yaml
 - name: Publish Image
-  uses: craftech-io/github-docker@v1.0.0
+  uses: craftech-io/package-action@v3.0.0
   id: url-GPR 
   with:
     tags: latest
     repository: my-user/my-repo
-    access_token: ${{ secrets.GITHUB_PAT }}
+    access_token: ${{ secrets.TOKEN_PAT }}
 
 ```
 - **${{ github.token }}** is scoped to the current repository, so if you want to push a different repository that is private you will need to provide your own [PAT](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
-
-#### References
-
-s
