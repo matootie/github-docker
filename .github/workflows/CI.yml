@@ -1,16 +1,15 @@
-name: "CI Run"
+name: "Github Package Registry"
 on:
   push:
     paths:
       - ".github/workflows/CI.yml"
-      - "Dockerfile"
       - "dist/index.js"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
         uses: actions/checkout@v2     
+
       - name: Run the Action
         uses: ./
         with:
@@ -31,8 +30,9 @@ jobs:
             THISISARG1=test
             THISISARG2=test
         if: always()            
-
-      - uses: craftech-io/slack-action@v1
+      
+      - name: Notification      
+        uses: craftech-io/slack-action@v1
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()

@@ -2,7 +2,6 @@
 
 Build and publish your repository as a Docker image and push it to GitHub Package Registry in one easy step.
 
-
 ## Inputs variables
 
 | With Parameter        | Required/Optional | Description |
@@ -58,3 +57,17 @@ with:
 - name: output
   run: echo ${{ steps.url-GPR.outputs.imageURL }}    
 ```
+
+### Push another repo
+```yaml
+- name: Publish Image
+  uses: craftech-io/github-docker@v1.0.0
+  id: url-GPR 
+  with:
+    tags: latest
+    repository: my-user/my-repo
+    access_token: ${{ secrets.GITHUB_PAT }}
+
+```
+
+- ${{ github.token }} is scoped to the current repository, so if you want to checkout a different repository that is private you will need to provide your own [PAT](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
