@@ -10,19 +10,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
       - name: Run the Action
         id: run-action
         uses: ./
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-          context: checkrun
           tags: |
             latest
-            v1
+            anothertag
           buildArg: |
-            HTTP_PROXY=http://10.20.30.2:1234
-            FTP_PROXY=http://40.50.60.5:4567
-
-      - name: Test output
-        run: echo ${{ steps.run-action.outputs.imageURL }}
+            THISISARG1=test
+            THISISARG2=test
+            
+      - uses: craftech-io/slack-action@v1
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()

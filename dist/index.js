@@ -946,7 +946,6 @@ module.exports = require("os");
 
 const process = __webpack_require__(765);
 const path = __webpack_require__(622);
-const url = __webpack_require__(835);
 const core = __webpack_require__(470);
 const exec = __webpack_require__(986);
 
@@ -973,9 +972,7 @@ async function run() {
     Step 3. Push the Docker image.
 
     */
-
     // Set the workspace directory and context.
-    const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
     const workdir = path.join(workspace, context);
@@ -1033,11 +1030,6 @@ async function run() {
     }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
-
-    // Delete the Docker config.
-    exec.exec(
-      'rm',
-      ['-v', `${home}/.docker/config.json`]);
   }
   catch (error) {
     core.setFailed(error.message);
@@ -1579,13 +1571,6 @@ module.exports = require("fs");
 /***/ (function(module) {
 
 module.exports = require("process");
-
-/***/ }),
-
-/***/ 835:
-/***/ (function(module) {
-
-module.exports = require("url");
 
 /***/ }),
 

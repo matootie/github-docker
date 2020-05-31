@@ -1,6 +1,5 @@
 const process = require('process');
 const path = require('path');
-const url = require('url');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 
@@ -27,9 +26,7 @@ async function run() {
     Step 3. Push the Docker image.
 
     */
-
     // Set the workspace directory and context.
-    const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
     const workdir = path.join(workspace, context);
@@ -87,11 +84,6 @@ async function run() {
     }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
-
-    // Delete the Docker config.
-    exec.exec(
-      'rm',
-      ['-v', `${home}/.docker/config.json`]);
   }
   catch (error) {
     core.setFailed(error.message);
