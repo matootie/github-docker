@@ -16,7 +16,8 @@ jobs:
         uses: ./
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: CI
+          repository: github-actions-for-packages
+          image_name: CI
           tags: |
             latest
             anothertag
