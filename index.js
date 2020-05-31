@@ -63,7 +63,7 @@ async function run() {
 
     var join = function() {
       var args = Array.prototype.slice.call(arguments);
-      return '[' + args.join(":") + ']';
+      return args.join(":");
     }
 
     let pushtags = [];
