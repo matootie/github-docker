@@ -1,2 +1,1 @@
-FROM python:3.7
-RUN python --version
+FROM node:12.16.3-slim
