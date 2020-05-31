@@ -6,8 +6,7 @@ ARG THISISARG2
 
 WORKDIR /github-actions
 
-COPY package*.json ./ \
-     index.js ./
+COPY . .
 
 RUN npm install \
     && npm run package \
