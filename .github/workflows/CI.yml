@@ -15,7 +15,7 @@ jobs:
         id: run-action
         uses: matootie/github-docker@v2.2.2
         with:
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          accessToken: ${{ secrets.TOKEN }}
           repositoryName: ayalaluquez/github-docker
           imageName: ci
           imageTag: latest
@@ -27,7 +27,7 @@ jobs:
       - name: Run the Action
         uses: matootie/github-docker@v2.2.2
         with:
-          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          accessToken: ${{ secrets.TOKEN }}
           repositoryName: ayalaluquez/github-actions-for-packages
           imageTag: latest
           buildArg: |
@@ -38,7 +38,6 @@ jobs:
       - name: Run the Action
         uses: ./
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ayalaluquez/github-actions-for-packages
           tags: |
             latest
