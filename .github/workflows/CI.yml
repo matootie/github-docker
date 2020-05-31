@@ -25,7 +25,6 @@ jobs:
             THISISARG2=test
 
       - name: Run the Action
-        id: run-action
         uses: ./
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
