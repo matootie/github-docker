@@ -80,7 +80,7 @@ async function run() {
     const pushRaw = core.getInput('tags', { require: false });
     if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => [join(imageURL, str)]);
 
-    for (let pushImage in pushtags) {
+    for (let pushImage of pushtags) {
       await exec.exec(
       `docker`,
       ['push', pushImage]);
