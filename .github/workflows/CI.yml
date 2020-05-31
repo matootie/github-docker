@@ -16,7 +16,7 @@ jobs:
         uses: matootie/github-docker@v2.2.2
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-          repositoryName: github-actions-for-packages
+          repositoryName: ayalaluquez/github-actions-for-packages
           imageName: tic-tac-toe
           imageTag: latest
           buildArg: |
@@ -28,7 +28,7 @@ jobs:
         uses: matootie/github-docker@v2.2.2
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-          repositoryName: github-actions-for-packages/tic-tac-toe
+          repositoryName: ayalaluquez/github-actions-for-packages
           imageTag: latest
           buildArg: |
             THISISARG1=test
@@ -39,7 +39,7 @@ jobs:
         uses: ./
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: github-actions-for-packages
+          repository: ayalaluquez/github-actions-for-packages
           tags: |
             latest
             anothertag
