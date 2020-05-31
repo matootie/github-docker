@@ -32,7 +32,8 @@ jobs:
           image_name: CI
           buildArg: |
             THISISARG1=test
-            THISISARG2=test    
+            THISISARG2=test
+        if: always()            
 
       - uses: craftech-io/slack-action@v1
         with:
