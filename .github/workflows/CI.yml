@@ -16,7 +16,7 @@ jobs:
         uses: ./
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: github-actions-for-packages
+          repository: github-actions-for-packages/
           image_name: tic-tac-toe
           tags: |
             latest
@@ -44,7 +44,6 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
           repository: github-actions-for-packages
-          image_name: tic-tac-toe
           tags: |
             latest
             anothertag
