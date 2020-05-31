@@ -1015,23 +1015,21 @@ async function run() {
     let buildtags = [];
     const buildRaw = core.getInput('tags', { require: false });
     if (buildRaw) buildtags = buildRaw.match(/\w\S+/g).flatMap(str => ["--tag", join(imageURL, str)]);   
-
-    let pushtags = [];
-    const pushRaw = core.getInput('tags', { require: false });
-    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => [join(imageURL, str)]);  
-    
-    
+ 
     // Build the Docker image.
     await exec.exec(
       `docker`,
       ['build', ...buildtags, workdir, ...buildArg]);
 
     // Push the Docker image.
-    
-    for (const pushImage in pushtags) {
+    let pushtags = [];
+    const pushRaw = core.getInput('tags', { require: false });
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => [join(imageURL, str)]);
+
+    for (let pushImage in pushtags) {
       await exec.exec(
       `docker`,
-      ['push', pushImage.pushtags]);
+      ['push', pushImage]);
     }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
