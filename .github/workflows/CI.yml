@@ -10,31 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Run the Action
-        id: run-action
-        uses: matootie/github-docker@v2.2.2
-        with:
-          accessToken: ${{ secrets.TOKEN }}
-          repositoryName: ayalaluquez/github-docker
-          imageName: ci
-          imageTag: latest
-          buildArg: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()            
-
-      - name: Run the Action
-        uses: matootie/github-docker@v2.2.2
-        with:
-          username: arielvinas
-          accessToken: ${{ secrets.TOKEN }}
-          imageTag: latest
-          buildArg: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()            
-
+        uses: actions/checkout@v2     
       - name: Run the Action
         uses: ./
         with:
