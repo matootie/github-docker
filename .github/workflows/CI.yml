@@ -39,6 +39,7 @@ jobs:
         uses: ./
         with:
           repository: ayalaluquez/github-actions-for-packages
+          access_token: ${{ secrets.TOKEN }}
           build_arg: |
             THISISARG1=test
             THISISARG2=test
@@ -48,6 +49,7 @@ jobs:
         uses: ./
         with:
           tags: latest
+          access_token: ${{ secrets.TOKEN }}          
           image_name: CI
           build_arg: |
             THISISARG1=test
