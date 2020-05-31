@@ -85,7 +85,7 @@ async function run() {
     for (const pushImage in pushtags) {
       await exec.exec(
       `docker`,
-      ['push', pushImage]);
+      ['push', pushImage.pushtags]);
     }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
