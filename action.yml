@@ -19,8 +19,8 @@ inputs:
     required: false
   tags:
     description: "The desired tag for the image. Defaults to current branch or release version number."
-    default: $ {{ GITHUB_SHA }}
-    required: false
+    default: ${{ github.sha }}
+    required: true
   build_args:
     description: "The build arguments for image."
     required: false
