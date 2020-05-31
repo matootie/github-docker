@@ -952,7 +952,6 @@ const exec = __webpack_require__(986);
 async function run() {
   try {
     /*
-
     Required data:
     - GitHub username.
       - Required
@@ -973,9 +972,7 @@ async function run() {
     Step 3. Push the Docker image.
 
     */
-
     // Set the workspace directory and context.
-    const home = process.env['HOME'];
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
     const workdir = path.join(workspace, context);
@@ -983,64 +980,56 @@ async function run() {
     // Log in to Docker.
     let username = core.getInput('username', { required: false });
     if (!username) username = process.env['GITHUB_ACTOR'];
-    const password = core.getInput('accessToken', { required: true });
+    const password = core.getInput('access_token', { required: true });
     await exec.exec(
       `docker`,
       ['login', 'docker.pkg.github.com', '--username', username, '--password', password]);
 
     // Process the repository name.
-    let repository = core.getInput('repositoryName', { required: false });
+    let repository = core.getInput('repository', { required: false });
     if (!repository) repository = process.env['GITHUB_REPOSITORY'];
     repository = repository.toLowerCase();
 
     // Process the image name.
-    let imageName = core.getInput('imageName', { required: false });
+    let imageName = core.getInput('image_name', { required: false });
     const repoArray = repository.split('/');
     if (!imageName) imageName = repoArray[repoArray.length - 1];
     imageName = imageName.toLowerCase();
-
-    // Process the image tag.
-    let imageTag = core.getInput('imageTag', { required: false });
-    const ref = process.env['GITHUB_REF'];
-    const refArray = ref.split('/');
-    if (!imageTag) {
-      const refLast = refArray[refArray.length - 1];
-      if (refLast === "merge" && refArray.length >= 2) {
-        imageTag = "mr" + refArray[refArray.length - 2];
-      } else {
-        imageTag = refLast;
-      }
-    }
-    let imageTagPrefix = core.getInput('imageTagPrefix', { required: false });
-    if (imageTagPrefix) imageTag = imageTagPrefix + imageTag;
-    let imageTagSuffix = core.getInput('imageTagSuffix', { required: false });
-    if (imageTagSuffix) imageTag = imageTag + imageTagSuffix;
-
+    
+    const imageURL = `docker.pkg.github.com/${repository}/${imageName}`
+    
+    
     // Process the build args
     let buildArg = [];
-    const buildArgsRaw = core.getInput('buildArg', { require: false });
+    const buildArgsRaw = core.getInput('build_args', { require: false });
     if (buildArgsRaw) buildArg = buildArgsRaw.match(/\w+=\S+/g).flatMap(str => ["--build-arg", str]);
 
-    // Set some variables.
-    const imageURL = `docker.pkg.github.com/${repository}/${imageName}:${imageTag}`
+    var join = function() {
+      var args = Array.prototype.slice.call(arguments);
+      return args.join(":");
+    }
 
+    let buildtags = [];
+    const buildRaw = core.getInput('tags', { require: false });
+    if (buildRaw) buildtags = buildRaw.match(/\w\S+/g).flatMap(str => ["--tag", join(imageURL, str)]);   
+ 
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', '--tag', imageURL, workdir, ...buildArg]);
+      ['build', ...buildtags, workdir, ...buildArg]);
 
     // Push the Docker image.
-    await exec.exec(
-      `docker`,
-      ['push', imageURL]);
+    let pushtags = [];
+    const pushRaw = core.getInput('tags', { require: false });
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => [join(imageURL, str)]);
 
+    for (let pushImage of pushtags) {
+      await exec.exec(
+      `docker`,
+      ['push', pushImage]);
+    }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
-
-    // Delete the Docker config.
-    exec.exec(
-      'rm',
-      ['-v', `${home}/.docker/config.json`]);
   }
   catch (error) {
     core.setFailed(error.message);

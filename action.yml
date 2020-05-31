@@ -1,7 +1,7 @@
-name: "GitHub Docker Action"
-description: "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step"
+name: "Docker Package Registry"
+description: "Build and publish your repository as a Docker image and push it to GitHub Package Registry"
 inputs:
-  accessToken:
+  access_token:
     description: "GitHub Repository Token to log in using."
     required: true
   context:
@@ -11,22 +11,17 @@ inputs:
   username:
     description: "GitHub user to publish the image on behalf of."
     required: false
-  repositoryName:
+  repository:
     description: "The repository to push the image to. Defaults to current repository. Must be specified in format user/repo"
     required: false
-  imageName:
+  image_name:
     description: "The desired name for the image. Defaults to current repository name."
     required: false
-  imageTag:
+  tags:
     description: "The desired tag for the image. Defaults to current branch or release version number."
-    required: false
-  imageTagPrefix:
-    description: "Added to the beginning of the tag."
-    required: false
-  imageTagSuffix:
-    description: "Added to the end of the tag."
-    required: false
-  buildArg:
+    default: ${{ github.sha }}
+    required: true
+  build_args:
     description: "The build arguments for image."
     required: false
 outputs:

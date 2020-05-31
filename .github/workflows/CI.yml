@@ -1,0 +1,38 @@
+name: "Github Package Registry"
+on:
+  push:
+    paths:
+      - ".github/workflows/CI.yml"
+      - "dist/index.js"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2     
+
+      - name: Run the Action
+        uses: ./
+        with:
+          repository: ayalaluquez/github-actions-for-packages
+          access_token: ${{ secrets.TOKEN }}
+          build_arg: |
+            THISISARG1=test
+            THISISARG2=test
+        if: always()            
+
+      - name: Run the Action
+        uses: ./
+        with:
+          tags: latest
+          access_token: ${{ secrets.TOKEN }}          
+          image_name: CI
+          build_arg: |
+            THISISARG1=test
+            THISISARG2=test
+        if: always()            
+      
+      - name: Notification      
+        uses: craftech-io/slack-action@v1
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()

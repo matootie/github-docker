@@ -2,63 +2,75 @@
 
 Build and publish your repository as a Docker image and push it to GitHub Package Registry in one easy step.
 
-## Inputs
+## Inputs variables
 
-### `accessToken`
+| With Parameter        | Required/Optional | Description |
+| --------------------- | ----------------- | ------------|
+| `access_token`        | **Required**     | GitHub Token for the user. Must have write permissions for packages. Recommended set up would be to use the provided GitHub Token for your repository; `${{ secrets.GITHUB_TOKEN }}`.
+| `context`             | ***Optional***   | Where should GitHub Docker find the Dockerfile? This is a path relative to the repository root. Defaults to `.`, meaning it will look for a `Dockerfile` in the root of the repository.
+| `tags`                | ***Optional***   | The desired name for the image tag. Defaults to current is the commit SHA that triggered the workflow. For example, ffac537e6cbbf934b08745a378932722df287a53.. 
+| `image_name`          | ***Optional***   | The desired name for the image. Defaults to current repository name. 
+| `build_arg`           | ***Optional***   | Any additional build arguments to use when building the image.
+| `username`            | ***Optional***   | GitHub user to publish the image on behalf of. Defaults to the user who triggered the action to run. 
+| `repository`          | ***Optional***   | The repository to push the image to. Defaults to current repository. Must be specified in format `user/repo`. Please specify the secret for Personal Access Token [(PAT)](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) 
 
-**Required**. GitHub Token for the user. Must have write permissions for packages. Recommended set up would be to use the provided GitHub Token for your repository; `${{ secrets.GITHUB_TOKEN }}`.
+## Outputs variables
 
-### `context`
-
-*Optional*. Where should GitHub Docker find the Dockerfile? This is a path relative to the repository root. Defaults to `.`, meaning it will look for a `Dockerfile` in the root of the repository.
-
-### `username`
-
-*Optional*. GitHub user to publish the image on behalf of. Defaults to the user who triggered the action to run.
-
-### `repositoryName`
-
-*Optional*. The repository to push the image to. Defaults to current repository. Must be specified in format `user/repo`.
-
-### `imageName`
-
-*Optional*. The desired name for the image. Defaults to current repository name.
-
-### `imageTag`
-
-*Optional*. The desired tag for the image. Defaults to current branch or release version number.
-
-### `imageTagPrefix`
-
-*Optional*. Added to the beginning of the tag. Useful if you want to let *GitHub Docker* decide the tag, but prepend something of your own to it.
-
-### `imageTagSuffix`
-
-*Optional*. Added to the end of the tag. Useful if you want to let *GitHub Docker* decide the tag, but append something of your own to it.
-
-### `buildArg`
-
-*Optional*. Any additional build arguments to use when building the image.
-```yaml
-with:
-  buildArg: |
-    HTTP_PROXY=http://10.20.30.2:1234
-    FTP_PROXY=http://40.50.60.5:4567
-```
-
-## Outputs
-
-### `imageURL`
-
-The full URL of the image.
+| With Parameter        | Required/Optional | Description |
+| --------------------- | ----------------- | ------------|
+| `imageURL`            | ***Optional***    | The full URL of the image. [See documentation](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjobs_idoutputs)
 
 ## Simple usage
 
 ```yaml
-- name: Checkout Repository
-  uses: actions/checkout@v2
 - name: Publish Image
-  uses: matootie/github-docker@v2.2.2
+  uses: craftech-io/github-docker@v1.0.0
   with:
-    accessToken: ${{ secrets.GITHUB_TOKEN }}
+    tags: latest
+    access_token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+### Use with multiples tags
+```yaml
+with:
+  tags: |
+    latest
+    anothertag
+```
+### Use with multiples ARGs
+```yaml
+with:
+  build_args: |
+    THISISARG1=test
+    THISISARG2=test
+```
+### Use with outputs variables
+
+```yaml
+- name: Publish Image
+  uses: craftech-io/github-docker@v1.0.0
+  id: url-GPR 
+  with:
+    tags: latest
+    access_token: ${{ secrets.GITHUB_TOKEN }}
+
+- name: output
+  run: echo ${{ steps.url-GPR.outputs.imageURL }}    
+```
+
+### Push a different repository
+```yaml
+- name: Publish Image
+  uses: craftech-io/github-docker@v1.0.0
+  id: url-GPR 
+  with:
+    tags: latest
+    repository: my-user/my-repo
+    access_token: ${{ secrets.GITHUB_PAT }}
+
+```
+- **${{ github.token }}** is scoped to the current repository, so if you want to push a different repository that is private you will need to provide your own [PAT](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+
+#### References
+
+s
