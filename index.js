@@ -53,7 +53,7 @@ async function run() {
     if (!imageName) imageName = repoArray[repoArray.length - 1];
     imageName = imageName.toLowerCase();
     
-    const imageURL = `docker.pkg.github.com/${repository}/${imageName}:`
+    const imageURL = `docker.pkg.github.com/${repository}/${imageName}`
     
     
     // Process the build args
@@ -65,10 +65,10 @@ async function run() {
       var args = Array.prototype.slice.call(arguments);
       return '[' + args.join(":") + ']';
     }
-    
+
     let pushtags = [];
     const pushRaw = core.getInput('tags', { require: false });
-    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", join(":", imageURL, str)]);    
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", join(imageURL, str)]);    
 
     // Build the Docker image.
     await exec.exec(
