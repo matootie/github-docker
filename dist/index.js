@@ -1027,10 +1027,12 @@ async function run() {
       ['build', ...buildtags, workdir, ...buildArg]);
 
     // Push the Docker image.
-    await exec.exec(
+    
+    for (const pushImage in pushtags) {
+      await exec.exec(
       `docker`,
-      ['push', ...pushtags]);
-
+      ['push', pushImage]);
+    }
     // Output the image URL.
     core.setOutput('imageURL', imageURL);
 
