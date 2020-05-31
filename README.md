@@ -69,5 +69,8 @@ with:
     access_token: ${{ secrets.GITHUB_PAT }}
 
 ```
-
 - **${{ github.token }}** is scoped to the current repository, so if you want to push a different repository that is private you will need to provide your own [PAT](https://help.github.com/es/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
+
+#### References
+
+s
