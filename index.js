@@ -64,7 +64,7 @@ async function run() {
 
     let pushtags = [];
     const pushRaw = core.getInput('tags', { require: false });
-    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", path.join(imageURL, str)]);    
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", join(":", imageURL, str)]);    
 
     // Build the Docker image.
     await exec.exec(
