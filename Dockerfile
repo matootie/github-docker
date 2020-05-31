@@ -6,10 +6,10 @@ ARG THISISARG2
 
 WORKDIR /github-actions
 
-COPY package*.json ./
+COPY package*.json ./ \
+     index.js
 
 RUN npm install \
     && npm run package \
     && npm cache clean --force
 
-COPY . .
