@@ -66,14 +66,19 @@ async function run() {
       return args.join(":");
     }
 
+    let buildtags = [];
+    const buildRaw = core.getInput('tags', { require: false });
+    if (buildRaw) buildtags = buildRaw.match(/\w\S+/g).flatMap(str => ["--tag", join(imageURL, str)]);   
+
     let pushtags = [];
     const pushRaw = core.getInput('tags', { require: false });
-    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", join(imageURL, str)]);    
-
+    if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => [join(imageURL, str)]);  
+    
+    
     // Build the Docker image.
     await exec.exec(
       `docker`,
-      ['build', ...pushtags, workdir, ...buildArg]);
+      ['build', ...buildtags, workdir, ...buildArg]);
 
     // Push the Docker image.
     await exec.exec(
