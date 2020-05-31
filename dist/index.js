@@ -946,6 +946,7 @@ module.exports = require("os");
 
 const process = __webpack_require__(765);
 const path = __webpack_require__(622);
+const url = __webpack_require__(835);
 const core = __webpack_require__(470);
 const exec = __webpack_require__(986);
 
@@ -1571,6 +1572,13 @@ module.exports = require("fs");
 /***/ (function(module) {
 
 module.exports = require("process");
+
+/***/ }),
+
+/***/ 835:
+/***/ (function(module) {
+
+module.exports = require("url");
 
 /***/ }),
 

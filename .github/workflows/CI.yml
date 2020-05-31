@@ -1,38 +1,28 @@
-name: "Github Package Registry"
+name: "CI Run"
 on:
   push:
     paths:
-      - ".github/workflows/CI.yml"
+      - ".github/workflows/test.yml"
       - "dist/index.js"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2     
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
       - name: Run the Action
+        id: run-action
         uses: ./
         with:
-          repository: ayalaluquez/github-actions-for-packages
-          access_token: ${{ secrets.TOKEN }}
-          build_arg: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()            
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          context: checkrun
+          tags: |
+            latest
+            v1
+          buildArg: |
+            HTTP_PROXY=http://10.20.30.2:1234
+            FTP_PROXY=http://40.50.60.5:4567
 
-      - name: Run the Action
-        uses: ./
-        with:
-          tags: latest
-          access_token: ${{ secrets.TOKEN }}          
-          image_name: CI
-          build_arg: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()            
-      
-      - name: Notification      
-        uses: craftech-io/slack-action@v1
-        with:
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+      - name: Test output
+        run: echo ${{ steps.run-action.outputs.imageURL }}
