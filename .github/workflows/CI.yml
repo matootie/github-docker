@@ -15,10 +15,10 @@ jobs:
         id: run-action
         uses: matootie/github-docker@v2.2.2
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: github-actions-for-packages
-          image_name: tic-tac-toe
-          tags: |
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          repositoryName: github-actions-for-packages
+          imageName: tic-tac-toe
+          imageTag: |
             latest
             anothertag
           buildArg: |
@@ -29,9 +29,9 @@ jobs:
       - name: Run the Action
         uses: matootie/github-docker@v2.2.2
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          repository: github-actions-for-packages/tic-tac-toe
-          tags: |
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+          repositoryName: github-actions-for-packages/tic-tac-toe
+          imageTag: |
             latest
             anothertag
           buildArg: |
@@ -47,7 +47,7 @@ jobs:
           tags: |
             latest
             anothertag
-          buildArg: |
+          build_arg: |
             THISISARG1=test
             THISISARG2=test
         if: always()            
@@ -58,7 +58,7 @@ jobs:
           access_token: ${{ secrets.GITHUB_TOKEN }}
           tags: latest
           image_name: CI
-          buildArg: |
+          build_arg: |
             THISISARG1=test
             THISISARG2=test
         if: always()            
