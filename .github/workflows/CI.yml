@@ -24,6 +24,17 @@ jobs:
             THISISARG1=test
             THISISARG2=test
 
+      - name: Run the Action
+        id: run-action
+        uses: ./
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: latest
+          image_name: CI
+          buildArg: |
+            THISISARG1=test
+            THISISARG2=test    
+
       - uses: craftech-io/slack-action@v1
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
