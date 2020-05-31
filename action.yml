@@ -3,7 +3,6 @@ description: "Build and publish your repository as a Docker image and push it to
 inputs:
   access_token:
     description: "GitHub Repository Token to log in using."
-    default: ${{ secrets.GITHUB_TOKEN }}
     required: true
   context:
     description: "Where should GitHub Docker find the Dockerfile, relative to the root of the repository."
@@ -20,6 +19,7 @@ inputs:
     required: false
   tags:
     description: "The desired tag for the image. Defaults to current branch or release version number."
+    default: $ {{ GITHUB_SHA }}
     required: false
   build_args:
     description: "The build arguments for image."

@@ -27,8 +27,8 @@ jobs:
       - name: Run the Action
         uses: matootie/github-docker@v2.2.2
         with:
+          username: arielvinas
           accessToken: ${{ secrets.TOKEN }}
-          repositoryName: ayalaluquez/github-actions-for-packages
           imageTag: latest
           buildArg: |
             THISISARG1=test
@@ -39,9 +39,6 @@ jobs:
         uses: ./
         with:
           repository: ayalaluquez/github-actions-for-packages
-          tags: |
-            latest
-            anothertag
           build_arg: |
             THISISARG1=test
             THISISARG2=test
