@@ -980,18 +980,18 @@ async function run() {
     // Log in to Docker.
     let username = core.getInput('username', { required: false });
     if (!username) username = process.env['GITHUB_ACTOR'];
-    const password = core.getInput('accessToken', { required: true });
+    const password = core.getInput('access_token', { required: true });
     await exec.exec(
       `docker`,
       ['login', 'docker.pkg.github.com', '--username', username, '--password', password]);
 
     // Process the repository name.
-    let repository = core.getInput('repositoryName', { required: false });
+    let repository = core.getInput('repository', { required: false });
     if (!repository) repository = process.env['GITHUB_REPOSITORY'];
     repository = repository.toLowerCase();
 
     // Process the image name.
-    let imageName = core.getInput('imageName', { required: false });
+    let imageName = core.getInput('image_name', { required: false });
     const repoArray = repository.split('/');
     if (!imageName) imageName = repoArray[repoArray.length - 1];
     imageName = imageName.toLowerCase();
@@ -1001,7 +1001,7 @@ async function run() {
     
     // Process the build args
     let buildArg = [];
-    const buildArgsRaw = core.getInput('buildArg', { require: false });
+    const buildArgsRaw = core.getInput('build_args', { require: false });
     if (buildArgsRaw) buildArg = buildArgsRaw.match(/\w+=\S+/g).flatMap(str => ["--build-arg", str]);
 
     var join = function() {
