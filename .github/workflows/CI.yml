@@ -17,13 +17,41 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
           repository: github-actions-for-packages
-          image_name: CI
+          image_name: tic-tac-toe
           tags: |
             latest
             anothertag
           buildArg: |
             THISISARG1=test
             THISISARG2=test
+        if: always()            
+
+      - name: Run the Action
+        uses: ./
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: github-actions-for-packages/tic-tac-toe
+          tags: |
+            latest
+            anothertag
+          buildArg: |
+            THISISARG1=test
+            THISISARG2=test
+        if: always()            
+
+      - name: Run the Action
+        uses: ./
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: github-actions-for-packages
+          image_name: tic-tac-toe
+          tags: |
+            latest
+            anothertag
+          buildArg: |
+            THISISARG1=test
+            THISISARG2=test
+        if: always()            
 
       - name: Run the Action
         uses: ./
