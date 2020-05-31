@@ -1007,7 +1007,11 @@ async function run() {
     const buildArgsRaw = core.getInput('buildArg', { require: false });
     if (buildArgsRaw) buildArg = buildArgsRaw.match(/\w+=\S+/g).flatMap(str => ["--build-arg", str]);
 
-
+    var join = function() {
+      var args = Array.prototype.slice.call(arguments);
+      return '[' + args.join(":") + ']';
+    }
+    
     let pushtags = [];
     const pushRaw = core.getInput('tags', { require: false });
     if (pushRaw) pushtags = pushRaw.match(/\w\S+/g).flatMap(str => ["--tags", join(":", imageURL, str)]);    
