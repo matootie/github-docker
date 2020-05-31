@@ -2,7 +2,7 @@ name: "CI Run"
 on:
   push:
     paths:
-      - ".github/workflows/test.yml"
+      - ".github/workflows/ci.yml"
       - "Dockerfile"
       - "dist/index.js"
 jobs:
