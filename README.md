@@ -1,3 +1,5 @@
+![Github Package Registry](https://github.com/craftech-io/package-action/workflows/Github%20Package%20Registry/badge.svg)
+
 # GitHub Docker Action
 
 Build and publish your repository as a Docker image and push it to GitHub Package Registry in one easy step.
