@@ -24,6 +24,9 @@ inputs:
   build_args:
     description: "The build arguments for image."
     required: false
+  dockerfile:
+    description: "The build arguments for image."
+    required: false    
 outputs:
   imageURL:
     description: "The URL of the image."

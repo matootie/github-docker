@@ -14,19 +14,33 @@ jobs:
         with:
           tags: latest
           access_token: ${{ secrets.GITHUB_TOKEN }}
-          username: arielvinas       
+          dockerfile: test/Dockerfile
           image_name: CI
-          build_arg: |
+          build_args: |
             THISISARG1=test
             THISISARG2=test
-        if: always()            
+        if: always()  
+
+      - name: Run the Action
+        uses: ./
+        with:
+          tags: latest
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: test/Dockerfile.test
+          image_name: CI
+          build_args: |
+            THISISARG1=test
+            THISISARG2=test
+        if: always() 
+
 
       - name: Run the Action
         uses: ./
         with:
           repository: ayalaluquez/github-action-example
           access_token: ${{ secrets.TOKEN_PAT }}
-          build_arg: |
+          dockerfile: test/Dockerfile
+          build_args: |
             THISISARG1=test
             THISISARG2=test
         if: always()

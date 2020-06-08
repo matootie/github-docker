@@ -973,6 +973,9 @@ async function run() {
     Step 3. Push the Docker image.
 
     */
+    let dockerfile = core.getInput('dockerfile', { required: false });
+    if (!dockerfile) dockerfile = "Dockerfile"
+
     // Set the workspace directory and context.
     const workspace = process.env['GITHUB_WORKSPACE'];
     const context = core.getInput('context', { required: true });
@@ -1014,11 +1017,13 @@ async function run() {
     const buildRaw = core.getInput('tags', { require: false });
     if (buildRaw) buildtags = buildRaw.match(/\w\S+/g).flatMap(str => ["--tag", join(imageURL, str)]);   
  
-    // Build the Docker image.
-    await exec.exec(
-      `docker`,
-      ['build', ...buildtags, workdir, ...buildArg]);
 
+    // Build the Docker image.
+    
+    await exec.exec(
+        `docker`,
+        ['build', ...buildtags, "--file", dockerfile, workdir, ...buildArg]);
+        
     // Push the Docker image.
     let pushtags = [];
     const pushRaw = core.getInput('tags', { require: false });
