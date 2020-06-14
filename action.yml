@@ -4,34 +4,30 @@ inputs:
   accessToken:
     description: "GitHub Repository Token to log in using."
     required: true
+  imageName:
+    description: "The desired name for the image. Defaults to current repository name."
+    required: false
+  tag:
+    description: "The desired tag for the image. Defaults to latest. Optionally accepts multiple tags separated by newline."
+    default: latest
+    required: false
+  buildArgs:
+    description: "Any additional build arguments to use when building the image, separated by newline."
+    required: false
   context:
     description: "Where should GitHub Docker find the Dockerfile, relative to the root of the repository."
     required: false
     default: "."
-  username:
-    description: "GitHub user to publish the image on behalf of."
+  contextName:
+    description: "What Dockerfile should GitHub Docker be using when building. Defaults to traditional Dockerfile name."
     required: false
-  repositoryName:
-    description: "The repository to push the image to. Defaults to current repository. Must be specified in format user/repo"
-    required: false
-  imageName:
-    description: "The desired name for the image. Defaults to current repository name."
-    required: false
-  imageTag:
-    description: "The desired tag for the image. Defaults to current branch or release version number."
-    required: false
-  imageTagPrefix:
-    description: "Added to the beginning of the tag."
-    required: false
-  imageTagSuffix:
-    description: "Added to the end of the tag."
-    required: false
-  buildArg:
-    description: "The build arguments for image."
+    default: Dockerfile
+  repository:
+    description: "The repository to push the image to. Defaults to the current repository. Must be specified in format user/repo."
     required: false
 outputs:
   imageURL:
-    description: "The URL of the image."
+    description: "The URL of the image, without the tag."
 runs:
   using: "node12"
   main: "dist/index.js"

@@ -1,10 +1,8 @@
 {
   "name": "github-docker",
-  "version": "2.0.0",
   "description": "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint index.js",
     "package": "ncc build index.js -o dist"
   },
   "repository": {
@@ -28,8 +26,9 @@
     "@actions/exec": "^1.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.21.0",
-    "eslint": "^6.8.0",
-    "minimist": ">=1.2.2"
+    "@zeit/ncc": "^0.21.0"
+  },
+  "jshintConfig": {
+    "esversion": 8
   }
 }
