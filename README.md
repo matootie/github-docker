@@ -45,7 +45,7 @@ For additional customizations, see further examples below. For more information 
     tag: latest
 ```
 
-In this example we specify a custom tag for the image. Remember to append the tag when using the outputted image URL in the workflow. See [this example](#publish-and-using-output) for more details.
+In this example we specify a custom tag for the image. Remember to append the tag when using the outputted image URL in the workflow. See [this example](#publishing-and-using-output) for more details.
 
 #### Publishing using several tags...
 
@@ -58,6 +58,8 @@ In this example we specify a custom tag for the image. Remember to append the ta
       latest
       ${{ github.sha }}
 ```
+
+In this example we publish the same image under two different tags.
 
 #### Publishing using build arguments...
 
