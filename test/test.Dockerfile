@@ -1,5 +1,5 @@
 # Example Dockerfile to use in action CI.
-FROM python:3.8-slim
+FROM python:3.8.3
 
 ARG TESTARG1
 ARG TESTARG2

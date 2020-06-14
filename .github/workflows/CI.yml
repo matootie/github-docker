@@ -33,8 +33,3 @@ jobs:
             TESTARG2=test2
           context: test/
           contextName: test.Dockerfile
-
-      - name: Print image URLs
-        run: |
-          echo ${{ steps.publish.outputs.imageURL }}/latest-${{ matrix.os }}
-          echo ${{ steps.publish.outputs.imageURL }}/test-${{ matrix.os }}
