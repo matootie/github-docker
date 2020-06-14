@@ -1,15 +1,13 @@
 {
   "name": "github-docker",
-  "version": "2.0.0",
   "description": "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint index.js",
     "package": "ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/craftech-io/package-action.git"
+    "url": "git+https://github.com/matootie/github-docker.git"
   },
   "keywords": [
     "GitHub",
@@ -20,16 +18,17 @@
   "author": "Mateja Lasan <mateja@lasan.ca> (https://github.com/matootie)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/craftech-io/package-action/issues"
+    "url": "https://github.com/matootie/github-docker/issues"
   },
-  "homepage": "https://github.com/craftech-io/package-action#readme",
+  "homepage": "https://github.com/matootie/github-docker#readme",
   "dependencies": {
     "@actions/core": "^1.2.1",
     "@actions/exec": "^1.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.21.0",
-    "eslint": "^6.8.0",
-    "minimist": ">=1.2.2"
+    "@zeit/ncc": "^0.21.0"
+  },
+  "jshintConfig": {
+    "esversion": 8
   }
 }

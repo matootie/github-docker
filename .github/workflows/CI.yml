@@ -1,4 +1,4 @@
-name: "Github Package Registry"
+name: "GitHub Docker"
 on:
   push:
     paths:
@@ -6,47 +6,36 @@ on:
       - "dist/index.js"
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-16.04
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - macos-10.15
+          - windows-2016
+          - windows-2019
     steps:
-      - uses: actions/checkout@v2     
-      - name: Run the Action
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run the action
         uses: ./
+        id: publish
         with:
-          tags: latest
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: test/Dockerfile
-          image_name: CI
-          build_args: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()  
+          accessToken: ${{ github.token }}
+          imageName: action-test
+          tag: |
+            latest-${{ matrix.os }}
+            test-${{ matrix.os }}
+          buildArgs: |
+            TESTARG1=test1
+            TESTARG2=test2
+          context: test/
+          contextName: test.Dockerfile
 
-      - name: Run the Action
-        uses: ./
-        with:
-          tags: latest
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: test/Dockerfile.test
-          image_name: CI
-          build_args: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always() 
-
-
-      - name: Run the Action
-        uses: ./
-        with:
-          repository: ayalaluquez/github-action-example
-          access_token: ${{ secrets.TOKEN_PAT }}
-          dockerfile: test/Dockerfile
-          build_args: |
-            THISISARG1=test
-            THISISARG2=test
-        if: always()
-
-      - name: Notification      
-        uses: craftech-io/slack-action@v1
-        with:
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+      - name: Print image URLs
+        run: |
+          echo ${{ steps.publish.outputs.imageURL }}/latest-${{ matrix.os}}
+          echo ${{ steps.publish.outputs.imageURL }}/test-${{ matrix.os}}

@@ -1,35 +1,33 @@
-name: "Docker Package Registry"
-description: "Build and publish your repository as a Docker image and push it to GitHub Package Registry"
+name: "GitHub Docker Action"
+description: "Build and publish your repository as a Docker image and push it to GitHub Package Registry in one step"
 inputs:
-  access_token:
+  accessToken:
     description: "GitHub Repository Token to log in using."
     required: true
+  imageName:
+    description: "The desired name for the image. Defaults to current repository name."
+    required: false
+  tag:
+    description: "The desired tag for the image. Defaults to latest. Optionally accepts multiple tags separated by newline."
+    default: latest
+    required: false
+  buildArgs:
+    description: "Any additional build arguments to use when building the image, separated by newline."
+    required: false
   context:
     description: "Where should GitHub Docker find the Dockerfile, relative to the root of the repository."
     required: false
     default: "."
-  username:
-    description: "GitHub user to publish the image on behalf of."
+  contextName:
+    description: "What Dockerfile should GitHub Docker be using when building. Defaults to traditional Dockerfile name."
     required: false
+    default: Dockerfile
   repository:
-    description: "The repository to push the image to. Defaults to current repository. Must be specified in format user/repo"
+    description: "The repository to push the image to. Defaults to the current repository. Must be specified in format user/repo."
     required: false
-  image_name:
-    description: "The desired name for the image. Defaults to current repository name."
-    required: false
-  tags:
-    description: "The desired tag for the image. Defaults to current branch or release version number."
-    default: ${{ github.sha }}
-    required: true
-  build_args:
-    description: "The build arguments for image."
-    required: false
-  dockerfile:
-    description: "The build arguments for image."
-    required: false    
 outputs:
   imageURL:
-    description: "The URL of the image."
+    description: "The URL of the image, without the tag."
 runs:
   using: "node12"
   main: "dist/index.js"
