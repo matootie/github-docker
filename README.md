@@ -2,6 +2,10 @@
 
 Build and publish your repository as a Docker image and push it to GitHub Package Registry in one easy step.
 
+[![GitHub Release](https://img.shields.io/github/v/release/matootie/github-docker)](https://github.com/matootie/github-docker/releases/latest)
+
+For help updating, view the [change logs](https://github.com/matootie/github-docker/releases).
+
 ## Inputs
 
 | Name                  | Requirement       | Description |
