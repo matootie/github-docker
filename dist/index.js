@@ -955,7 +955,9 @@ async function run() {
     const context = path.join(
       process.env.GITHUB_WORKSPACE,
       core.getInput("context", { required: true }));
-    const contextName = core.getInput("contextName", { required: false });
+    const contextName = path.join(
+      context,
+      core.getInput("contextName", { required: false }));
 
     // Log in to Docker.
     const username = process.env.GITHUB_ACTOR;
