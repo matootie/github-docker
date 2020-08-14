@@ -103,7 +103,7 @@ In this example you can see how easy it is to reference the image URL after publ
     tag: ${{ github.sha }}
 
 - name: Print Full Image URL
-  run: echo ${{ stets.publish.outputs.imageURL }}/${{ github.sha }}
+  run: echo ${{ stets.publish.outputs.imageURL }}:${{ github.sha }}
 ```
 
 Otherwise, future steps will end up using the literal tag `latest` for the image and not the customized tag.
