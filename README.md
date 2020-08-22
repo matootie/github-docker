@@ -30,7 +30,7 @@ For help updating, view the [change logs](https://github.com/matootie/github-doc
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ github.token }}
 ```
@@ -43,7 +43,7 @@ For additional customizations, see further examples below. For more information 
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ github.token }}
     tag: latest
@@ -55,7 +55,7 @@ In this example we specify a custom tag for the image. Remember to append the ta
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ github.token }}
     tag: |
@@ -69,7 +69,7 @@ In this example we publish the same image under two different tags.
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ github.token }}
     buildArgs: |
@@ -83,7 +83,7 @@ Using build arguments is easy, just set each one on its own individual line, sim
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   id: publish
   with:
     accessToken: ${{ github.token }}
@@ -96,7 +96,7 @@ In this example you can see how easy it is to reference the image URL after publ
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   id: publish
   with:
     accessToken: ${{ github.token }}
@@ -112,7 +112,7 @@ Otherwise, future steps will end up using the literal tag `latest` for the image
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ github.token }}  
     context: custom/context/dir/
@@ -125,7 +125,7 @@ Here we see an example where GitHub Docker is given additional context on how to
 
 ```yaml
 - name: Publish Image
-  uses: matootie/github-docker:v3.0.0
+  uses: matootie/github-docker@v3.0.0
   with:
     accessToken: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     repository: my-user/my-repo
