@@ -22,6 +22,10 @@ inputs:
     description: "What Dockerfile should GitHub Docker be using when building. Defaults to traditional Dockerfile name."
     required: false
     default: Dockerfile
+  containerRegistry:
+    description: "Whether or not to push to GitHub Container Registry instead of GitHub Package Registry."
+    required: false
+    default: "false"
   repository:
     description: "The repository to push the image to. Defaults to the current repository. Must be specified in format user/repo."
     required: false
