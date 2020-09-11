@@ -17,9 +17,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run the action
+      - name: Run the action with Package Registry
         uses: ./
-        id: publish
+        id: publish-ghpr
         with:
           accessToken: ${{ github.token }}
           imageName: action-test
@@ -31,3 +31,19 @@ jobs:
             TESTARG2=test2
           context: test/
           contextName: test.Dockerfile
+
+      - name: Run the action with Container Registry
+        uses: ./
+        id: publish-ghcr
+        with:
+          accessToken: ${{ secrets.PAT }}
+          imageName: github-docker-test
+          tag: |
+            latest-${{ matrix.os }}
+            test-${{ matrix.os }}
+          buildArgs: |
+            TESTARG1=test1
+            TESTARG2=test2
+          context: test/
+          contextName: test.Dockerfile
+          containerRegistry: true
