@@ -993,6 +993,7 @@ async function run() {
     repository = repository.toLowerCase();
 
     // Decide whether or not we're pushing to container registry.
+    console.log(typeof(crRaw));
     const containerRegistryEnabled = (crRaw == "true");
 
     // Set some throwaway values.
