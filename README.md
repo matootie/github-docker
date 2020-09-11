@@ -18,7 +18,7 @@ For help updating, view the [change logs](https://github.com/matootie/github-doc
   - [Using output](#publishing-and-using-output)
   - [Custom context](#publishing-using-custom-context)
   - [Publishing to a different repository](#publishing-to-a-different-repository)
-- [**GitHub Container Registry**]()
+- [**GitHub Container Registry**](#github-container-registry-usage)
   - [Simple usage](#simple-minimal-usage-1)
   - [Custom tag](#publishing-using-custom-tag-1)
   - [Multiple tags](#publishing-using-several-tags-1)
