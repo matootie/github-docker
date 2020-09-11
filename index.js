@@ -47,9 +47,6 @@ async function run() {
     repository = repository.toLowerCase();
 
     // Decide whether or not we're pushing to container registry.
-    console.log(crRaw);
-    console.log((crRaw == "true"));
-    console.log((crRaw == "false"));
     const containerRegistryEnabled = (crRaw == "true");
 
     // Set some throwaway values.
@@ -103,7 +100,7 @@ async function run() {
         "docker",
         [
           "login",
-          "ghcr.io",
+          "docker.pkg.github.com",
           "--username",
           username,
           "--password",
