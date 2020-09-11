@@ -961,7 +961,7 @@ async function run() {
     const buildArgsRaw = core.getInput("buildArgs", { required: false });
     const contextRaw = core.getInput("context", { required: true });
     const contextNameRaw = core.getInput("contextName", { required: false });
-    const crRaw = core.getInput("containerRegistry", { required: false });
+    const crRaw = core.getInput("containerRegistry", { required: true });
     const repositoryRaw = core.getInput("repository", { required: false });
 
     /* =========================================================================
@@ -993,7 +993,9 @@ async function run() {
     repository = repository.toLowerCase();
 
     // Decide whether or not we're pushing to container registry.
-    console.log(typeof(crRaw));
+    console.log(crRaw);
+    console.log((crRaw == "true"));
+    console.log((crRaw == "false"));
     const containerRegistryEnabled = (crRaw == "true");
 
     // Set some throwaway values.
