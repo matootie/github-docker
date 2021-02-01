@@ -1,13 +1,13 @@
 {
-  "name": "github-containers",
-  "description": "Build and publish your repository as a Docker image and push it to GitHub Package Registry or GitHub Container Registry in one step",
+  "name": "ghcr",
+  "description": "Build and publish your repository as a Docker image and push it to GitHub Container Registry in one step",
   "main": "index.js",
   "scripts": {
     "package": "ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matootie/github-docker.git"
+    "url": "git+https://github.com/matootie/ghcr.git"
   },
   "keywords": [
     "GitHub",
@@ -18,9 +18,9 @@
   "author": "Mateja Lasan <mateja@lasan.ca> (https://github.com/matootie)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matootie/github-docker/issues"
+    "url": "https://github.com/matootie/ghcr/issues"
   },
-  "homepage": "https://github.com/matootie/github-docker#readme",
+  "homepage": "https://github.com/matootie/ghcr#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.3"
