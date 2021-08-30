@@ -1,5 +1,9 @@
 # GitHub Docker Action
 
+### Disclaimer
+
+> I originally wrote this when GitHub Actions was very new, and the setup you had to use to push images using Docker's provided actions was not very clean. I wanted to make a one-click tool. This tool still works, however GitHub Actions has been around for a while now and Docker has really improved their provided actions. My honest recommendation to you is that you try using [Docker Build-Push Action](https://github.com/docker/build-push-action#readme). It's what I use now. It has plenty more features, and uses Buildx. This repository will always have a place in my heart as the project that really got me into GitHub Actions.
+
 Build and publish your repository as a Docker image and push it to GitHub Package Registry or GitHub Container Registry in one easy step.
 
 [![GitHub Release](https://img.shields.io/github/v/release/matootie/github-docker)](https://github.com/matootie/github-docker/releases/latest)
